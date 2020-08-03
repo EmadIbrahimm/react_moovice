@@ -8,7 +8,9 @@ class Popular extends React.Component {
         }
     }
     componentDidMount() {
-        fetch('https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=<API_KEY>')
+        const url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=64fa49c3edf2b2560729022d07c88f68'
+        console.log(url)
+        fetch(url)
         .then(res => res.json())
         .then(json => {
             this.setState({
@@ -20,12 +22,32 @@ class Popular extends React.Component {
         })
     }
     render() {
+        const {
+            isLoaded, movies
+        } = this.state;
+        if (!isLoaded) {
+            return <h1>Loading...</h1>;
+        }
+        else
         return(
             <div>
-                Popular
+                <div>
+                    {/* <ul>
+                    {movies.map(movie => (
+                       <li key={movie.id}>
+                           {movie.id}
+
+                       </li>
+                         
+                    ))}
+
+                    </ul> */}
+                    
+                    Movies has been loaded 
+                </div>
             </div>
 
-        )
+        );
     }
-}
+};
 export default Popular;
