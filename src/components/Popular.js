@@ -15,7 +15,7 @@ class Popular extends React.Component {
         .then(json => {
             this.setState({
                 isLoaded:true,
-                movies: json,
+                movies: json.results,
 
             });
             
@@ -25,6 +25,7 @@ class Popular extends React.Component {
         const {
             isLoaded, movies
         } = this.state;
+        console.log('movie', movies)
         if (!isLoaded) {
             return <h1>Loading...</h1>;
         }
@@ -32,16 +33,19 @@ class Popular extends React.Component {
         return(
             <div>
                 <div>
-                    {/* <ul>
+                    <ul>
                     {movies.map(movie => (
-                       <li key={movie.id}>
-                           {movie.id}
+                        
+                       <li key={movie.page}>
+                           
+                           {movie.backdrop_path} - {movie.page}
+
 
                        </li>
                          
                     ))}
-
-                    </ul> */}
+                    
+                    </ul>
                     
                     Movies has been loaded 
                 </div>
