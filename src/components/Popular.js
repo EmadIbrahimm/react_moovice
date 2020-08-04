@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from './movie/Card'
 class Popular extends React.Component {
     constructor(props) {
         super(props)
@@ -15,43 +16,40 @@ class Popular extends React.Component {
         .then(json => {
             this.setState({
                 isLoaded:true,
-                movies: json.results,
+                movies: json.results, 
 
             });
             
         })
     }
-    render() {
-        const {
-            isLoaded, movies
-        } = this.state;
-        console.log('movie', movies)
-        if (!isLoaded) {
-            return <h1>Loading...</h1>;
-        }
-        else
-        return(
-            <div>
+render() {
+const {
+     isLoaded, movies
+     } = this.state;
+    // console.log('movie', movies)
+    if (!isLoaded) {
+     return <h1>Loading...</h1>;
+  }
+  else
+  return (
+    <div>
+        {movies.map((movie)=> {
+            // console.log(movie)
+            return(
                 <div>
-                    <ul>
-                    {movies.map(movie => (
-                        
-                       <li key={movie.page}>
-                           
-                           {movie.backdrop_path} - {movie.page}
+                    <Card
+                        posterPath={movie.poster_path}
+                    title={movie.title}
 
-
-                       </li>
-                         
-                    ))}
-                    
-                    </ul>
-                    
-                    Movies has been loaded 
+                    />
                 </div>
-            </div>
+            );
+            })}
+        
+    </div>
 
-        );
-    }
+);
+}
 };
 export default Popular;
+
